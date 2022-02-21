@@ -1,0 +1,19 @@
+﻿@inject IAuthService AuthService
+@inject ILocalStorageService LocalStorage
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Logout" Class="mr-3 mb-n1" />
+            Logout Confirmation
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText>Logout Confirmation</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="Submit">Logout</MudButton>
+    </DialogActions>
+</MudDialog>

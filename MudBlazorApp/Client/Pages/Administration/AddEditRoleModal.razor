@@ -1,0 +1,44 @@
+﻿@inject IRoleService RoleService
+
+<EditForm Model="Role" OnValidSubmit="Save">
+	<FluentValidationValidator @ref="_fluentValidationValidator" />
+	<MudDialog>
+		<TitleContent>
+			@{
+				if (Role.Id == 0)
+				{
+					<MudText Typo="Typo.h6">
+						<MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+						Add Role
+					</MudText>
+				}
+				else
+				{
+					<MudText Typo="Typo.h6">
+						<MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+						Update Role
+					</MudText>
+				}
+			}
+		</TitleContent>
+		<DialogContent>
+			@if (Role.Id != 0)
+			{
+				<MudTextField Disabled For="@(() => Role.Id)" @bind-Value="Role.Id" Label="Id" />
+			}
+			<MudTextField T="string" For="@(() => Role.Name)" @bind-Value="Role.Name" Label="Name" />
+			<MudTextField For="@(() => Role.Description)" @bind-Value="Role.Description" Label="Description" />
+		</DialogContent>
+		<DialogActions>
+			<MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">Cancel</MudButton>
+			@if (Role.Id != 0)
+			{
+				<MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary">Update</MudButton>
+			}
+			else
+			{
+				<MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">Save</MudButton>
+			}
+		</DialogActions>
+	</MudDialog>
+</EditForm>

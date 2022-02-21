@@ -1,0 +1,35 @@
+﻿@page "/brands"
+
+@inject IBrandService BrandService
+@inject IDialogService DialogService
+
+<MudTitle Title="Brands" Description="Manage Brands."/>
+
+@if(!_loaded)
+{
+	<MudProgressCircular Color="Color.Primary" Indeterminate="true"/>
+}
+else
+{
+	<MudTable Hover="true" Elevation="25" Items="brandList">
+		<ToolBarContent>
+            <MudButton DisableElevation OnClick="(() => InvokeModal())" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">Create</MudButton>
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">Export</MudButton>
+			<MudSpacer/>
+            <MudTextField T="string" ValueChanged="@(s => FilterBrand(s))" Immediate=true Placeholder="Search for Customers..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" OnClearButtonClick="ResetSearch" Clearable/>
+		</ToolBarContent>
+		<HeaderContent>
+			<MudTh>Name</MudTh>
+			<MudTh>Description</MudTh>
+			<MudTh Style="text-align:right">Actions</MudTh>
+		</HeaderContent>
+		<RowTemplate>
+			<MudTd DataLabel="Name">@context.Name</MudTd>
+			<MudTd DataLabel="Description">@context.Description</MudTd>
+			<MudTd DataLabel="Actions" Style="text-align: right">
+				<MudButton DisableElevation OnClick="@(() => InvokeModal(@context.Id))" Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Edit" IconColor="Color.Surface">Edit</MudButton>
+				<MudButton DisableElevation OnClick="@(() => Delete(@context.Id))" Variant="Variant.Filled" Color="Color.Dark" StartIcon="@Icons.Material.Filled.Delete" IconColor="Color.Surface">Delete</MudButton>
+            </MudTd>
+		</RowTemplate>
+	</MudTable>
+}

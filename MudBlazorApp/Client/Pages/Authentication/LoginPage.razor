@@ -1,0 +1,35 @@
+﻿@page "/login"
+
+@layout MainLayout
+@attribute [AllowAnonymous]
+@inject IAuthService AuthService
+@inject ILocalStorageService LocalStorage
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<MudTitle Title="Login" Description="Use your credential to login" />
+
+<EditForm Model="user" OnValidSubmit="HandleLogin">
+	<FluentValidationValidator @ref="_fluentValidationValidator" />
+	<MudGrid>
+		<MudItem xs="12">
+			<div class="d-flex justify-center">
+				MudBlazor App
+			</div>
+		</MudItem>
+		<DataAnnotationsValidator />
+		<MudItem xs="12">
+			<MudTextField T="string" Label="E-mail" Variant="Variant.Outlined"
+						  @bind-Value="user.Email" For="@(() => user.Email)" />
+		</MudItem>
+		<MudItem xs="12">
+			<MudTextField Label="Password" Variant="Variant.Outlined"
+						  @bind-Value="user.Password" For="@(() => user.Password)"
+						  InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
+		</MudItem>
+		<MudItem xs="12" Class="d-flex justify-center">
+			<MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled=@(!Validated) Color="Color.Primary" Size="Size.Large" Style="width: 100%;">
+				Sign In
+			</MudButton>
+		</MudItem>
+	</MudGrid>
+</EditForm>

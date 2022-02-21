@@ -1,0 +1,16 @@
+﻿@inject IDialogService DialogService
+
+<AuthorizeView>
+    <Authorized>
+        <div class="pa-4 justify-center my-4 mud-text-align-center">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="profile">Hi, @context.User.Identity.Name!</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Logout">Log Out</MudButton>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="pa-4 justify-center my-4 mud-text-align-center">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="register">Register</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" Link="login">Log in</MudButton>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>

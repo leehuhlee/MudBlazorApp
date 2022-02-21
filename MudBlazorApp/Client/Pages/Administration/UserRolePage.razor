@@ -1,0 +1,39 @@
+﻿@page "/role/{UserUrl}"
+
+@inject IUserService UserService
+@inject IRoleService RoleService
+
+<MudTitle Title="@Title" Description="@Description" />
+
+@if(!_loaded)
+{
+	<MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+	<MudTable Elevation="25" Items="userRoleList">
+		<ToolBarContent>
+			<MudSpacer/>
+            <MudTextField T="string" ValueChanged="@(s => FilterUserRole(s))" Immediate=true Placeholder="Search for Customers..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" OnClearButtonClick="ResetSearch" Clearable/>
+		</ToolBarContent>
+		<HeaderContent>
+			<MudTh>Name</MudTh>
+			<MudTh>Description</MudTh>
+			<MudTh Style="text-align:right">Status</MudTh>
+		</HeaderContent>
+		<RowTemplate>
+			<MudTd DataLabel="Name">@context.RoleName</MudTd>
+			<MudTd DataLabel="Description">@context.RoleDescription</MudTd>
+			<MudTd DataLabel="Status" Style="text-align: right">
+				@if (context.Selected)
+				{
+					<MudButton Color="Color.Secondary">Selected</MudButton>
+				}
+				else
+				{
+					<MudButton OnClick="@(() => ChangeUserRole(context))" Color="Color.Secondary">Select</MudButton>
+				}
+            </MudTd>
+		</RowTemplate>
+	</MudTable>
+}

@@ -1,0 +1,24 @@
+﻿@inject IAuthService AuthService
+
+<AuthorizeView>
+	<Authorized>
+		<MudCard Elevation="0" Square="true" Class="@Class">
+			<MudCardHeader>
+				<CardHeaderAvatar>
+					@if(string.IsNullOrEmpty(user.ProfilePictureDataUrl))
+					{
+						<MudAvatar Color="Color.Secondary">@FirstLetterOfName</MudAvatar>
+					}
+					else
+					{
+						<MudAvatar Image="@user.ProfilePictureDataUrl" Style="height:50px; width:50px;"/>
+					}
+				</CardHeaderAvatar>
+				<CardHeaderContent>
+					<MudText Typo="Typo.body2">@context.User.Identity.Name</MudText>
+					<MudText Typo="Typo.caption">@user.Email</MudText>
+				</CardHeaderContent>
+			</MudCardHeader>
+		</MudCard>
+	</Authorized>
+</AuthorizeView>

@@ -1,0 +1,40 @@
+﻿@page "/users"
+
+@inject IUserService UserService
+@inject IRoleService RoleService
+@inject IDialogService DialogService
+
+<MudTitle Title="Users" Description="Manage Users." />
+
+@if(!_loaded)
+{
+	<MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+	<MudTable Elevation="25" Items="userTableList">
+		<ToolBarContent>
+            <MudButton DisableElevation OnClick="(() => InvokeModal())" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">Create</MudButton>
+			<MudSpacer/>
+            <MudTextField T="string" ValueChanged="@(s => FilterUser(s))" Immediate=true Placeholder="Search for Customers..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" OnClearButtonClick="ResetSearch" Clearable/>
+		</ToolBarContent>
+		<HeaderContent>
+			<MudTh>Name</MudTh>
+			<MudTh>Email</MudTh>
+			<MudTh>IsOnline</MudTh>
+			<MudTh>Role</MudTh>
+			<MudTh Style="text-align:right">Actions</MudTh>
+		</HeaderContent>
+		<RowTemplate>
+			<MudTd DataLabel="Name">@context.UserName</MudTd>
+			<MudTd DataLabel="Email">@context.Email</MudTd>
+			<MudTd DataLabel="IsOnline">@context.IsOnline</MudTd>
+			<MudTd DataLabel="Role">@context.Role</MudTd>
+			<MudTd DataLabel="Actions" Style="text-align: right">
+				<MudButton DisableElevation OnClick="@(() => GoToProfile(@context.Id))" Variant="Variant.Filled" Color="Color.Warning" StartIcon="@Icons.Material.Filled.Person" IconColor="Color.Surface">Profile</MudButton>
+				<MudButton DisableElevation OnClick="@(() => GoToUserRole(@context.Id))" Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Edit" IconColor="Color.Surface">Role</MudButton>
+				<MudButton DisableElevation OnClick="@(() => Delete(@context.Id))" Variant="Variant.Filled" Color="Color.Dark" StartIcon="@Icons.Material.Filled.Delete" IconColor="Color.Surface">Delete</MudButton>
+            </MudTd>
+		</RowTemplate>
+	</MudTable>
+}

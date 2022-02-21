@@ -1,0 +1,42 @@
+﻿@* MudBlazorApp *@
+@using MudBlazorApp.Client
+@using MudBlazorApp.Shared
+@using MudBlazorApp.Shared.Models;
+
+@* System *@
+@using System.Net.Http
+@using System.Net.Http.Json
+
+@* Microsoft *@
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.AspNetCore.Components.WebAssembly.Http
+@using Microsoft.JSInterop
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Authorization
+
+@* Page *@
+@using MudBlazorApp.Client.Shared
+@using MudBlazorApp.Client.Shared.Components
+
+@* Service *@
+@using MudBlazorApp.Client.Services.AuthService
+@using MudBlazorApp.Client.Services.ChatService
+@using MudBlazorApp.Client.Services.RoleService
+@using MudBlazorApp.Client.Services.UserService
+@using MudBlazorApp.Client.Services.BrandService
+@using MudBlazorApp.Client.Services.ProductService
+
+@* Frameworks *@
+@using Blazored.LocalStorage
+@using Blazored.FluentValidation
+@using MudBlazor
+
+@* Managers *@
+@inject NavigationManager NavigationManager
+
+@* UI *@
+@inject ISnackbar SnackBar
+@inject IJSRuntime JSRuntime

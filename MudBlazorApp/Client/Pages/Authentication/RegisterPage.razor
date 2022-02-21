@@ -1,0 +1,45 @@
+﻿@page "/register"
+@layout MainLayout
+@attribute [AllowAnonymous]
+@inject IAuthService AuthService
+@inject ILocalStorageService LocalStorage
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<EditForm Model="user" OnValidSubmit="HandleRegistration">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudGrid>
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                MudBlazor App
+            </div>
+        </MudItem>
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                <MudText Typo="Typo.h4">Register</MudText>
+            </div>
+        </MudItem>
+        <MudItem  xs="12">
+            <div class="d-flex justify-center">
+                <MudText>Already have an account?<MudLink Href="/login">Sign In</MudLink></MudText>
+            </div>
+        </MudItem>
+        <MudItem  xs="12">
+            <MudTextField T="string" Label="E-mail" @bind-Value="user.Email" For="@(() => user.Email)" />
+        </MudItem>
+        <MudItem  xs="12">
+            <MudTextField For="@(() => user.FirstName)" @bind-Value="user.FirstName" Label="First Name" />
+        </MudItem>
+        <MudItem  xs="12">
+            <MudTextField For="@(() => user.LastName)" @bind-Value="user.LastName" Label="Last Name" />
+        </MudItem>
+        <MudItem  xs="12">
+            <MudTextField For="@(() => user.Password)" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" @bind-Value="user.Password" Label="Password" />
+        </MudItem>
+        <MudItem  xs="12">
+            <MudTextField For="@(() => user.ConfirmPassword)" InputType="InputType.Password" @bind-Value="user.ConfirmPassword" Label="Confirm Password" />
+        </MudItem>
+        <MudItem  xs="12" Class="d-flex justify-center">
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">Register</MudButton>
+        </MudItem>
+    </MudGrid>
+</EditForm>
