@@ -12,8 +12,8 @@ using MudBlazorApp.Server.Data;
 namespace MudBlazorApp.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220215115053_AddProductModel")]
-    partial class AddProductModel
+    [Migration("20220404074059_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,9 @@ namespace MudBlazorApp.Server.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -56,6 +59,9 @@ namespace MudBlazorApp.Server.Migrations
 
                     b.Property<int>("FromUserId")
                         .HasColumnType("int");
+
+                    b.Property<string>("FromUserProfilePictureUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
@@ -83,6 +89,9 @@ namespace MudBlazorApp.Server.Migrations
                     b.Property<int>("BrandId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -104,6 +113,9 @@ namespace MudBlazorApp.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -113,6 +125,22 @@ namespace MudBlazorApp.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2022, 4, 4, 9, 40, 59, 402, DateTimeKind.Local).AddTicks(9799),
+                            Description = "create, read, update, delete",
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2022, 4, 4, 9, 40, 59, 402, DateTimeKind.Local).AddTicks(9802),
+                            Description = "read",
+                            Name = "Customer"
+                        });
                 });
 
             modelBuilder.Entity("MudBlazorApp.Shared.Models.User", b =>
@@ -123,7 +151,7 @@ namespace MudBlazorApp.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("DateCreated")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -143,6 +171,9 @@ namespace MudBlazorApp.Server.Migrations
 
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ProfilePictureDataUrl")
+                        .HasColumnType("text");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");

@@ -11,18 +11,21 @@ namespace MudBlazorApp.Server.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
-            if(modelBuilder.Entity<Role>() == null)
-            {
-                modelBuilder.Entity<Role>().HasData(
+            modelBuilder.Entity<Role>().HasData(
                 new Role
                 {
                     Id = 1,
+                    Name = "Admin",
+                    Description = "create, read, update, delete",
+                    CreatedDate = DateTime.Now
+                },
+                new Role
+                {
+                    Id = 2,
                     Name = "Customer",
-                    Description = "read"
+                    Description = "read",
+                    CreatedDate = DateTime.Now
                 });
-            }
 
             modelBuilder.Entity<ChatMessage>(entity =>
             {
